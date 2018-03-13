@@ -66,18 +66,18 @@ void setup_mqtt() {
     while(true);
   }
 
-  File certFile = SPIFFS.open("/b5de44d341-certificate.der", "r");
+  File certFile = SPIFFS.open(certificate_path, "r");
   if (!certFile) {
     Serial.println(F("Couldn't load cert"));
-    while(true);
+    while(true) delay(10);
   }
   espClient.loadCertificate(certFile,certFile.size());
 
-  File privateKeyFile = SPIFFS.open("/b5de44d341-private.der", "r");
+  File privateKeyFile = SPIFFS.open(private_key_path, "r");
   espClient.loadPrivateKey(privateKeyFile,privateKeyFile.size());
   if (!privateKeyFile) {
     Serial.println(F("Couldn't load key"));
-    while(true);
+    while(true) delay(10);
   }
 
   SPIFFS.end();
